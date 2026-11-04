@@ -1,0 +1,20 @@
+# Entorno / secretos
+.env
+*.local
+cookies.txt
+cookies.json
+
+# Sistema
+Thumbs.db
+.DS_Store
+
+# Logs y dependencias
+*.log
+node_modules/
+
+# Material de cursos con copyright (no subir)
+subtitulos_*/
+*.vtt
+
+# Salida intermedia
+tmp/
