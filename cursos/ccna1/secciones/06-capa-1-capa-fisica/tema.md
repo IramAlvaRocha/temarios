@@ -114,7 +114,7 @@ Hogar: un AP, WPA2/WPA3-PSK, canal automático o 1/6/11, 2.4+5 GHz. Empresa: mú
 
 ## Tips
 - **Directo = distinto tipo de equipo; cruzado = mismo tipo** (regla clásica pre-auto-MDIX).
-- T568B es el más usado en instalaciones comerciales (EE. UU.); T568A es obligatorio en instalaciones federales y es el requerido por estándares de residencial en algunos países. Eso sí: **no mezclar** salvo para cruzado.
+- T568B es el más usado en instalaciones comerciales (EE. UU.); T568A es obligatorio en instalaciones federales de EE. UU. y es el requerido por estándares de residencial en algunos países. Eso sí: **no mezclar** salvo para cruzado.
 - El examen pregunta: "¿Qué cable conecta switch con switch?" → cruzado (o directo si hay auto-MDIX).
 - 100 m es el límite Ethernet en cobre; más allá: fibra.
 - Fibra: monomodo = distancia/láser/amarillo; multimodo = corta distancia/LED/naranja-agua. Conector LC = el más común en switches actuales.

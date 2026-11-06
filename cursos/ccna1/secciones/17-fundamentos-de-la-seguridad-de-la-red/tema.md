@@ -43,7 +43,7 @@
 - **Cifrado:** VPN (IPsec/SSL) para acceso remoto y sitios interconectados; TLS para web/correo; SSH para gestión.
 - **Copias de seguridad** (3-2-1) y plan de respuesta a incidentes: el ransomware se paga menos cuando puedes restaurar.
 - **Monitorización y logs:** Syslog centralizado, NetFlow, SIEM; detección temprana.
-- **Formación de usuarios:** anti-phishing, reporte de incidentes — el 80%+ de brechas involucran humano.
+- **Formación de usuarios:** anti-phishing, reporte de incidentes — la mayoría de brechas involucran al elemento humano (Verizon DBIR); el phishing es el vector inicial más común.
 
 ### 17.3 Seguridad de los Dispositivos (Clase 17.3)
 Medidas concretas en routers/switches Cisco (útiles para labs y examen):
@@ -57,7 +57,10 @@ R1(config)# username admin secret claveFuerte9!
 R1(config)# line vty 0 4
 R1(config-line)# transport input ssh
 R1(config-line)# login local
+R1(config-line)# exit
 R1(config)# ip ssh version 2
+R1(config)# end
+R1# copy running-config startup-config
 ```
 3. **Acceso físico**: el puerto Console da control total del equipo → racks cerrados/con llave, acceso solo para personal autorizado; desactivar puertos de switch sin usar (`shutdown`), etiquetado e inventario.
 4. **Banner** legal (`banner motd`) y sin información de sistema (nada de versión/modelo).
@@ -124,7 +127,7 @@ En Packet Tracer/Wireshark: con Telnet, el login (usuario/clave) aparece en clar
 ## Datos curiosos
 - **WannaCry** (12 de mayo de 2017) infectó ~230.000 equipos en 150 países en un solo día explotando SMBv1 (ETERNALBLUE, filtrado de la NSA); Boeing, Telefónica y el NHS británico estuvieron entre las víctimas. El kill-switch accidental de Marcus Hutchins (un dominio sin registrar) detuvo la propagación.
 - El ataque **Morris Worm** (1988, 1.º gusano famoso de Internet) tiró ~10% de la red incipiente; su autor casi es detenido; hoy el término "virus de red" no existía, se le llamó "gusano".
-- El 90 %+ de los incidentes empiezan por phishing según reportes Verizon DBIR sucesivos; la seguridad humana (formación + MFA) es el control más coste-efectivo que existe.
+- Según los informes Verizon DBIR sucesivos, la mayoría de brechas involucran al elemento humano y el phishing es el vector inicial más común; la seguridad humana (formación + MFA) es el control más coste-efectivo que existe.
 - Cisco publica sus boletines de seguridad en **PSIRT** (Cisco Security Advisories); los administradores la revisan como parte del ciclo de mantenimiento.
 
 ## Para tu libreta de apuntes

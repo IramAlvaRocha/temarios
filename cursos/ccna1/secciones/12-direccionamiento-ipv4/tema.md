@@ -139,8 +139,8 @@ Una pyme detrás de NAT usa `192.168.0.0/16`; el ISP le asigna una pública `81.
 - Routers de Internet no propagan RFC 1918: sin NAT no sales a Internet (salvo CGN).
 
 ## Datos curiosos
-- CIDR (RFC 1519, 1993) eliminó las clases y la máscara con clase, permitiendo agregación de rutas y frenando el crecimiento de las tablas de Internet; IPv6 eliminó el concepto de clase del todo.
-- El 3 de febrero de 2011 la IANA asignó los últimos /8 disponibles: el mundo "se quedó sin IPv4" a nivel global (los RIRs agotaron después: APNIC 2011, RIPE 2012, ARIN 2015, LACNIC 2014, AFRINIC 2016).
+- CIDR (RFC 1519, 1993 — obsoletado por RFC 4632 en 2006) eliminó las clases y la máscara con clase, permitiendo agregación de rutas y frenando el crecimiento de las tablas de Internet; IPv6 eliminó el concepto de clase del todo.
+- El 3 de febrero de 2011 la IANA asignó los últimos /8 disponibles: el mundo "se quedó sin IPv4" a nivel global (los RIRs agotaron después: APNIC 2011, RIPE 2012, ARIN 2015, LACNIC 2014, AFRINIC 2017 — entró en soft-landing el 31 de marzo de 2017).
 - RFC 1918 (1996) reemplazó a los antiguos rangos del RFC 1597; la reserva de 192.168.x.x venía de entornos de entrenamiento/labs y por eso tu router casa casi siempre lo usa.
 
 ## Para tu libreta de apuntes

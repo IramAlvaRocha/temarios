@@ -13,7 +13,9 @@
 
 ### 5.1 Reglas de Protocolo (Clase 5.1)
 Un **protocolo** es un conjunto de reglas acordadas que los dispositivos deben cumplir para comunicarse. Todo protocolo define:
-- **Codificación (encoding):** cómo se representan los bits en el medio (niveles de tensión, pulsos de luz, ondas de radio) — p. ej., Manchester en 10BASE-T; 100BASE-TX usa **MLT-3** (4B/5B + NRZI en fibra 100BASE-FX).
+- **Codificación (encoding):** cómo se representan los bits en el medio (niveles de tensión, pulsos de luz, ondas de radio) — p. ej., Manchester en 10BASE-T.
+  - `100BASE-TX` = 4B/5B + MLT-3 sobre par trenzado.
+  - `100BASE-FX` = 4B/5B + NRZI sobre fibra.
 - **Formato y encapsulación del mensaje:** estructura del mensaje (cabeceras/campos) para que el receptor lo entienda.
 - **Tamaño del mensaje:** límites (p. ej., MTU de 1500 bytes en Ethernet).
 - **Sincronización (timing):** velocidad de transmisión (control de flujo) y orden de envío (entrega ordenada: "¿quién habla primero?").

@@ -29,7 +29,8 @@ Ethernet (IEEE **802.3**) es la tecnología de red cableada dominante. Formatos 
 - Bits especiales (primer byte):
   - **I/G (Individual/Group)**, bit 0 del primer octeto: 0 = unicast/individual, 1 = multicast/group.
   - **U/L (Universal/Local)**, bit 1: 0 = universal (OUI real), 1 = administrada localmente (LAA, usable por software/hypervisores).
-- Tipos: **unicast** (I/G=0), **multicast** (I/G=1; IPv4 multicast → `01:00:5E:00:00:00–7F:FF:FF`), **broadcast** (`FF:FF:FF:FF:FF:FF`).
+  - *Nota (numeración de bits):* esta sección numera los bits del primer octeto en orden **LSB-first** (bit 0 = I/G = 0x01; bit 1 = U/L = 0x02). La sección 13 (EUI-64) numera en orden **MSB-first** contando desde 1 (bit 7 = U/L = 0x02; bit 8 = I/G = 0x01). Son los mismos bits (máscaras 0x02 / 0x01); solo cambia la convención de numeración.
+- Tipos: **unicast** (I/G=0), **multicast** (I/G=1; IPv4 multicast → `01:00:5E:00:00:00`–`01:00:5E:7F:FF:FF`), **broadcast** (`FF:FF:FF:FF:FF:FF`).
 - MAC plano: no jerárquico, válido solo en el segmento local; no se "routea". Cambiar de subred = nuevas MAC por salto, la IP se conserva.
 - Dirección MAC de un switch/router de interfaces: `show interfaces` / `show version` (la base MAC del chasis en Cisco deriva las de las interfaces).
 
@@ -133,7 +134,7 @@ De repente `show mac address-table count` alcanza el máximo (p. ej. 8192) por u
 4. Inunda la trama por todos los puertos de la VLAN menos el de entrada (unknown unicast flooding). Además aprende `AAAA.BBBB.1111 → Fa0/1`. Cuando PC-B conteste, aprenderá su puerto y dejará de inundar.
 5. `show mac address-table`: tabla CAM capa 2 (MAC → puerto); `show arp`: caché capa 3 (IP → MAC) del dispositivo (router/L3) o host.
 6. `show mac address-table` · `show mac address-table address 0050.7966.6801` · `show mac address-table count`.
-7. Store-and-forward: reenvía tras recibir toda la trama y validar CRC → latencia ∝ tamaño, detecta runts/giants/CRC; ideal campus. Cut-through: reenvía tras leer MAC destino (~12 B) → latencia mínima fija, no detecta errores; ideal HPC. Fragment-free: 64 B iniciales, compromiso.
+7. Store-and-forward: reenvía tras recibir toda la trama y validar CRC → latencia ∝ tamaño, detecta runts/giants/CRC; ideal campus. Cut-through: reenvía tras leer MAC destino (6 B: primeros 6 bytes tras el preámbulo = MAC destino) → latencia mínima fija, no detecta errores; ideal HPC. Fragment-free: 64 B iniciales, compromiso.
 8. El paquete IP viaja dentro de una trama Ethernet: la app genera datos → TCP (+20-60 B) → IP (+20-60 B, el paquete de 1000 B ya incluye cabecera IP) → Ethernet (+18 B: MAC dst 6 + src 6 + EtherType 2 + FCS 4) → trama total = 1000 + 18 = **1018 B** (sin padding adicional); si el payload de la trama < 46 B se rellenaría (aquí no aplica). Está dentro de los límites 64–1518 B.
 </details>
 
@@ -148,7 +149,7 @@ De repente `show mac address-table count` alcanza el máximo (p. ej. 8192) por u
 
 ## Datos curiosos
 - Las direcciones MAC se llamaron originalmente **MAC-48** y luego **EUI-48** (Extended Unique Identifier). Existe EUI-64 para autoconfiguración de IPv6 (ver sección 13).
-- La CAM del switch es memoria especializada de acceso en un ciclo de reloj, diseñada para búsquedas paralelas masivas: de ahí que un switch reenvíe en nanosegundos sin CPU.
+- La CAM del switch es memoria especializada de acceso en un ciclo de reloj, diseñada para búsquedas paralelas masivas: de ahí la conmutación por hardware (tabla CAM), del orden de sub-microsegundo, sin CPU general.
 - El ataque **MAC flooding** fue descrito públicamente en los 90s (camisetas y conferencias); la respuesta de la industria fue port-security y DHCP snooping/802.1X.
 - 01:80:C2:00:00:00 es la MAC destino de las BPDUs STP: por eso `show mac address-table` no muestra BPDUs aprendidas (no son "aprendidas": el switch las consume/procesa localmente).
 

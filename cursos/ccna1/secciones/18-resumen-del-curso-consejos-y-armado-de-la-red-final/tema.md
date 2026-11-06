@@ -35,7 +35,7 @@ Cuando la red crece, el diseño en capas lo hace manejable:
 show ip interface brief        show running-config      show startup-config
 show version                   show mac address-table   show arp
 show cdp neighbors [detail]    show interfaces [status] show ip route
-show vlan brief                show spanning-tree (mención)   show ip dhcp binding
+show vlan brief                show spanning-tree (se estudia en la Parte 2 del curso)   show ip dhcp binding
 ```
 **IOS (configuración):**
 ```

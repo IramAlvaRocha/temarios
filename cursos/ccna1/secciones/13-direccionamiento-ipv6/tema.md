@@ -63,6 +63,7 @@ R1(config)# ipv6 unicast-routing      ! global: el router enruta IPv6
 1. El host aprende el prefijo /64 vía **RA** (Router Advertisement) o lo conoce.
 2. Genera la parte de host:
    - **EUI-64 modificado**: toma la MAC (48b), la parte por la mitad, inserta `FF:FE` y **invierte el bit 7** (U/L) del primer byte: MAC `00:1B:44:11:3A:B7` → `021b:44ff:fe11:3ab7` → GUA `2001:db8:acad:1:021b:44ff:fe11:3ab7/64`.
+   - *Nota (numeración de bits U/L e I/G):* la sección 08 numera los bits del primer octeto en orden **LSB-first** (bit 0 = I/G = 0x01; bit 1 = U/L = 0x02), mientras que esta sección habla de "bit 7" (y la literatura EUI-64) en orden **MSB-first** contando desde 1 (bit 7 = U/L = 0x02; bit 8 = I/G = 0x01). Se trata de los mismos bits: U/L = 0x02 (la máscara que se invierte en EUI-64), I/G = 0x01.
    - **Identificador aleatorio/estables de privacidad** (extensión RFC 4941/7217): preferido hoy por privacidad (evita tracking por MAC). Windows/macOS/Linux usan por defecto IDs aleatorios ("temporary addresses").
 3. **DAD** verifica unicidad antes de asignar.
 
@@ -75,7 +76,7 @@ R1(config)# ipv6 unicast-routing      ! global: el router enruta IPv6
 ### 13.5 Direccionamiento Dinámico para LLAs IPv6 (Clase 13.5)
 - LLA siempre se autogenera al habilitar IPv6 (EUI-64 o aleatorio), o se fija manualmente (`fe80::1`).
 - Rule: todo nodo IPv6 tiene LLA; sin LLA el enlace no funciona.
-- EUI-64 para LLA: MAC → mitad + FFFE + flip bit U/L → `fe80::021b:44ff:fe11:3ab7` (ejemplo con la misma MAC).
+- EUI-64 para LLA: MAC → mitad + FFFE + flip bit U/L → `fe80::21b:44ff:fe11:3ab7` (ejemplo con la misma MAC).
 - En Windows, `ipconfig /all` muestra "Link-local IPv6 Address". En Linux: `ip -6 addr`.
 
 ### 13.6 Direcciones IPv6 Multicast (Clase 13.6)

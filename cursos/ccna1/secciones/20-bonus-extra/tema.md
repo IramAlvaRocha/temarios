@@ -18,7 +18,7 @@ Sección bonus (Clase 20.1 — Clase Extra). Contenido breve y orientado a ampli
 - **Refuerzos prácticos recomendados tras esta parte:**
   - Subnetting diario (10 min: escribe subredes de /24, /16, /19, /27 sin calculadora).
   - Un lab semanal en Packet Tracer: "cada viernes resuelves una topología nueva en <45 min".
-  - Leer RFCs ligeros: 791 (IP), 768 (UDP), 793 (TCP), 3021 (/31) — en 10 minutos cada uno ganas más precisión que con horas de vídeo.
+  - Leer RFCs ligeros: 791 (IP), 768 (UDP), 793 (TCP), 4443 (ICMPv6), 4861 (NDP), 3021 (/31) — en 10 minutos cada uno ganas más precisión que con horas de vídeo.
   - Capturas con **Wireshark** (gratuito) de tráfico real (tu propia red): filtra `arp`, `icmp`, `dns`, `tcp.port==80` y observa los encabezados vistos en esta parte.
 - **Recursos oficiales y confiables:**
   - Cisco Exam Topics 200-301 (cisco.com): la referencia de qué entra.

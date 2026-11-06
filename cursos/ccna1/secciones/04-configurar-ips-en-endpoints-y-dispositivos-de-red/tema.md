@@ -119,7 +119,7 @@ PC1 (`192.168.1.10`) no llega a `192.168.2.20`:
 5. Si responde por IP pero no por nombre (`ping www.cisco.com` falla): problema de DNS, no de red.
 
 ### Ejemplo 4 — Gateway por defecto mal configurado
-PC con IP `192.168.1.10/24` pero gateway `192.168.2.1`: navega por la LAN (ping al gateway correcto fallaría) pero no sale fuera. Síntoma típico: "navega el router pero no Internet". Corrección: gateway = IP de la interfaz del router en **la misma subred** del PC.
+PC con IP `192.168.1.10/24` pero gateway configurado `192.168.2.1` (fuera de su subred `192.168.1.0/24`). Lo que ocurre en realidad: el PC alcanza sin problemas a los hosts de su misma subred (entrega directa, sin gateway), pero para cualquier destino externo intenta resolver por ARP la MAC del gateway `192.168.2.1`; como ARP solo opera dentro del enlace y `192.168.2.1` no pertenece a la subred, no hay respuesta ARP para él → no hay trama posible → **no hay salida a Internet** (ni a ninguna otra red). Síntomas: ping a la LAN (misma subred) OK; ping a cualquier IP remota falla ("Destination host unreachable" generado por el propio PC al no obtener respuesta ARP). Corrección: configurar un gateway **en la misma subred** que el PC (p. ej. `192.168.1.1`, la IP de la interfaz del router en esa LAN).
 
 ## Ejercicios
 

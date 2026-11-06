@@ -18,7 +18,7 @@ Funcionamiento (escenario típico):
 2. Consulta su **caché ARP**: si existe entrada válida → usa la MAC.
 3. Si no, envía un **ARP request** por **broadcast** (`FF:FF:FF:FF:FF:FF`): "¿Quién tiene 192.168.1.20? Dígamelo a 192.168.1.10 (MAC-A)".
 4. Todos en el segmento procesan el broadcast; solo el dueño responde con un **ARP reply** (unicast a MAC-A): "192.168.1.20 está en MAC-B".
-5. A guarda `IP → MAC` en su caché (entradas dinámicas, caducan ~2–4 min por inactividad en Windows/Linux) y envía la trama.
+5. A guarda `IP → MAC` en su caché (entradas dinámicas, caducan en decenas de segundos a minutos según el SO — Linux: `gc_stale_time` = 60 s por defecto; Windows moderno aplica detección de inalcanzabilidad (estilo ND) sobre ARP, con tiempos mayores) y envía la trama.
 - Si el destino está fuera de la subred: la caché ARP se usa para el **gateway**, no para el host remoto.
 - **Proxy ARP:** un router responde ARP en nombre de hosts de otra red si tiene ruta (deshabilítalo/considera su implicación de seguridad; por defecto en Cisco está habilitado).
 - **Gratuitous ARP:** ARP "yo soy IP X con MAC Y" anunciado sin pregunta — usado para detectar IPs duplicadas y actualizar tablas (failover VRRP/HSRP).
@@ -115,7 +115,7 @@ Atacante envía ARP replies falsos: "el gateway está en MI mac". Víctimas reen
 
 ## Datos curiosos
 - ARP es anterior a IP en cuanto a formalidad: RFC 826 (noviembre 1982), por David C. Plummer. Ya el ARPANET necesitaba un puente entre direccionamiento lógico y físico.
-- El esquema 48 bits de MAC hace improbable (pero no imposible) la colisión de direcciones; fabricantes registran rangos OUI ante el IEEE por ~2.000-3.000 USD.
+- El esquema 48 bits de MAC hace improbable (pero no imposible) la colisión de direcciones; los fabricantes registran rangos OUI ante el IEEE Registration Authority (un bloque MA-L cuesta US$ 3.585 según la tarifa vigente).
 - NDP está definido en RFC 4861/4862 (2007) y sustituye también a la detección de encaminadores ICMP y autoconfig de IPv6 antiguos (RFC 1970).
 - IPv4 puede operar sin ARP solo en medios punto a punto (PPP) donde la MAC no existe: ahí IP funciona "directo" sobre el enlace.
 

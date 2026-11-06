@@ -13,7 +13,7 @@
 - 1.3 **Preparativos para empezar. Descargar e instalar Packet Tracer** (5:26)
 - 1.4 **Problemas al Registrarte en NetAcad?** (5:21)
 - 1.5 **Recuerda que cuentas con nuestro asesoramiento y respuestas a tus preguntas** (3:10)
-- 1.6 **Recuerda que cuentas con nuestro asesoramiento y respuestas a tus preguntas** (3:10)
+- 1.6 **Recuerda que cuentas con nuestro asesoramiento y respuestas a tus preguntas** (3:10) _(duplicada en el catálogo de origen: mismo vídeo que 1.5; en el material se desdobla como "1.5/1.6 Asesoramiento")_
 
 ## 2. Conceptos generales (1h 19m)
 

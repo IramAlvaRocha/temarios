@@ -83,7 +83,7 @@ El **router** es el dispositivo de capa 3:
 - Rutas:
   - **Directamente conectadas** (C y L en `show ip route`: C = red, L = /32 del propio enlace).
   - **Estáticas:** configuradas a mano (`ip route 10.0.0.0 255.0.0.0 192.168.1.2`). Simples, sin overhead, pero no se adaptan a fallos.
-  - **Dinámicas:** aprendidas por protocolos (OSPF, EIGRP, BGP...). Escalables y adaptables; más complejas (fora de alcance en esta sección).
+  - **Dinámicas:** aprendidas por protocolos (OSPF, EIGRP, BGP...). Escalables y adaptables; más complejas (fuera de alcance en esta sección).
   - **Default route:** `0.0.0.0 0.0.0.0` ("gateway de último recurso").
 - Longest-prefix-match: ante varias rutas que coinciden con el destino, gana la más específica (mayor prefijo).
 

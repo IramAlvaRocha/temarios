@@ -176,9 +176,9 @@ FastEthernet0/2        unassigned      YES unset  down                  down
 1. **(Recordar)** ¿Qué prompt identifica el modo EXEC privilegiado y cómo se entra?
 2. **(Recordar)** ¿Qué diferencia hay entre running-config y startup-config? ¿Dónde reside cada una?
 3. **(Aplicar)** Escribe la secuencia exacta de comandos para: asignar hostname `R1`, contraseña enable `cisco`, cifrar contraseñas, desactivar resolución DNS y crear banner `#Solo autorizados#`.
-4. **(Aplicar)** Configura acceso por consola con contraseña `lab` y timeout de 10 minutos. ¿Qué dos comandos `line` son obligatorios?
+4. **(Aplicar)** Configura acceso por consola con contraseña `lab` y timeout de 10 minutos. ¿Qué dos comandos son obligatorios dentro de `line console 0`? (El resto es recomendable, no obligatorio.)
 5. **(Comprender)** ¿Por qué se recomienda `no ip domain-lookup` en equipos de prácticas? ¿Qué pasa si no lo pones y escribes `confog t`?
-6. **(Aplicar)** Tras configurar un router, indica el comando para guardar y dos formas equivalentes de reiniciar y verificar que conserva la config.
+6. **(Aplicar)** Indica el comando para guardar la configuración y dos formas equivalentes de verificar que los cambios persisten tras un reload.
 7. **(Analizar)** Un alumno hace `reload` sin `copy run start` y, al volver, ha perdido toda la config. Explica por qué y qué debería haber hecho. ¿Qué comando habría mostrado la diferencia antes de recargar?
 8. **(Analizar)** ¿Por qué `enable secret` es superior a `enable password`? ¿Qué hace `service password-encryption` y qué NO garantiza?
 
@@ -188,9 +188,9 @@ FastEthernet0/2        unassigned      YES unset  down                  down
 1. `Switch#` / `Router#`; con el comando `enable` desde user EXEC.
 2. running-config = RAM, activa, volátil. startup-config = NVRAM, de arranque, persistente.
 3. `enable` → `configure terminal` → `hostname R1` → `enable secret cisco` → `service password-encryption` → `no ip domain-lookup` → `banner motd #Solo autorizados#` → `end`.
-4. `line console 0` + `password lab` + `login` (obligatorios); más `exec-timeout 10 0` para el timeout. (Sin `login`, la contraseña no se pide.)
+4. Obligatorios en `line console 0`: `password lab` y `login` (sin `login` la contraseña no se pide; sin `password`, `login` no tiene qué pedir). El resto es recomendable, no obligatorio: `exec-timeout 10 0` para el timeout (10 min de inactividad).
 5. Sin él, IOS interpreta lo irreconocible como nombre de host y lanza una consulta DNS que tarda; con `no ip domain-lookup` responde al instante con error de sintaxis.
-6. Guardar: `copy running-config startup-config` (o `write memory`). Reiniciar: `reload`. Verificar: `show startup-config` (y/o `show running-config` tras el reload).
+6. Guardar: `copy running-config startup-config` (o `write memory`). Verificar, forma 1: `show startup-config` (confirma que la copia en NVRAM ya incluye los cambios, antes de recargar). Verificar, forma 2: hacer `reload` y comprobar `show running-config` (los cambios persisten tras el arranque).
 7. La RAM es volátil: al recargar se borra y arranca desde NVRAM. Debió hacer `copy run start`. `show running-config` vs `show startup-config` (o `show startup-config | include ...`) habría mostrado la diferencia.
 8. `enable secret` se almacena con hash (tipo 5/9), `enable password` en claro/tipo 7 reversible. `service password-encryption` aplica ofuscación tipo 7 a contraseñas en plano; no es cifrado fuerte: un volcado del config permite revertirlas.
 </details>
@@ -204,7 +204,7 @@ FastEthernet0/2        unassigned      YES unset  down                  down
 - `show ip interface brief` es el comando de diagnóstico rápido nº 1: memorízalo.
 
 ## Datos curiosos
-- Cisco IOS nació de Cisco IOS para las primeras routers integrados IP (finales de los 80); el nombre "IOS" sobrevivió incluso a las eras de CATOS (switches CatOS) y NX-OS (datacenter).
+- Cisco IOS nació de Cisco IOS para los primeros routers integrados IP (finales de los 80); el nombre "IOS" sobrevivió incluso a las eras de CATOS (switches CatOS) y NX-OS (datacenter).
 - El tipo de cifrado `service password-encryption` (tipo 7) fue público desde los 90; por eso Cisco recomienda `enable secret` con MD5 (tipo 5) o, mejor, SHA-256 (tipo 9) en equipos modernos.
 - El modo `setup` (System Configuration Dialog) fue la consola "guiada" de los primeros routers; hoy solo aparece como cortesía cuando falta startup-config.
 

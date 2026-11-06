@@ -37,7 +37,7 @@
 **Peer-to-peer**: cada nodo actúa a la vez como cliente y servidor; no hay servidor central (o es opcional, p. ej., localización de tracker/semillas).
 - Ejemplos: **BitTorrent** (descarga distribuida), compartición de archivos Windows (SMB/CIFS en grupos de trabajo), llamadas VoIP P2P, blockchain.
 - Ventajas: sin cuello de botella central, escalabilidad natural, reparto de costes/ancho de banda.
-- Problemas: seguridad distribuida difícil (no hay perímetro central), legalidad (descargas), piratería; difícil de controlar con firewalls; mal prioritario de red (mucho tráfico).
+- Problemas: seguridad distribuida difícil (no hay perímetro central), legalidad (descargas), piratería; difícil de controlar con firewalls; consumo de ancho de banda impredecible.
 - Cliente-servidor vs P2P: CS = control central, backup y seguridad simples, coste concentrado; P2P = resiliencia y coste distribuido, gestión compleja. En la práctica muchos servicios son híbridos (BitTorrent con trackers; mensajería tipo Signal/WhatsApp con servidores de rendezvous).
 
 ### 16.5 Protocolos de Servicios Web, Email y Transferencia de Archivos (Clase 16.5)
@@ -80,6 +80,7 @@
 - **Lease**: concesión temporal (horas-días); el cliente renueva en T1 (50%)/T2 (87.5%) del lease; si expira sin renovar, vuelve a DORA.
 - Tipos: manual (MAC→IP fija), automática (fija pero entre rango), dinámica (pool + lease). **Reserva DHCP** = IP fija por MAC con toda la config automática.
 - En Cisco: `ip dhcp pool LAN` + `network`, `default-router`, `dns-server`, `excluded-address` (parte 2); en hosts, `ipconfig /release` y `/renew`.
+- DHCP relay: `ip helper-address <servidor>` permite que un router reenvíe las difusiones DHCP a un servidor centralizado (Parte 2).
 - DHCPv6: con o sin estado (con RA flags O/M; ver sección 13); DUID identifica al cliente; rapid commit.
 
 ### 16.7 Preguntas del Módulo

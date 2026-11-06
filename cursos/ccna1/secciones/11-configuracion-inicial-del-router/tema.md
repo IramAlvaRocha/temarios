@@ -136,7 +136,7 @@ SW1 (`vlan 1` = `192.168.1.2/24`) debe gestionarse desde la LAN de administraci�
 ## Datos curiosos
 - Los primeros routers Cisco (AGS, 1986) conmutaban ~1.500 paquetes/segundo; hoy hay enrutadores de núcleo con decenas de Tbps en backplanes. Cisco tiene más instalaciones de equipamiento de red que ningún otro fabricante en la historia.
 - El banner legal es un requisito habitual en auditorías (indemnización/acceso autorizado): en EE. UU. han servido como evidencia de "aviso de sistema privado" en casos judiciales.
-- "enable secret" tipo 9 (scrypt) llegó con IOS 15.3(3)M/IOS XE para superar MD5 (tipo 5, vulnerable a cracking por GPU).
+- "enable secret" tipo 9 (scrypt) aparece en IOS/IOS XE modernos (hacia la rama 15.3(3)M; versión exacta no verificada con precisión) para superar MD5 (tipo 5, vulnerable a cracking por GPU).
 
 ## Para tu libreta de apuntes
 - Básicos: hostname, enable secret, no ip domain-lookup, service password-encryption, banner motd, line con 0/vty + password + login + exec-timeout.

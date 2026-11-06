@@ -59,7 +59,7 @@ Estructura básica de una trama Ethernet II:
 - **Preámbulo + SFD**: sincronización y marca de inicio.
 - **MAC destino/origen**: 6 bytes; unicast, multicast (bit I/G = 1, p. ej. 01:00:5E:xx para IPv4 multicast) o broadcast (FF:FF:FF:FF:FF:FF).
 - **Tipo** (Ethernet II): código del protocolo de capa 3 (0x0800 IPv4, 0x86DD IPv6, 0x0806 ARP). En tramas **802.3** el campo es Length (longitud) y LLC lleva el tipo (802.2 + SNAP).
-- **Datos/relleno:** MTU mínimo 64 B de trama total → relleno si el payload < 46 B. MTU máximo 1500 B (jumbo frames ~9000 B, fuera de CCNA).
+- **Datos/relleno:** Trama Ethernet mínima = 64 B (incluyendo FCS, sin contar el preámbulo); máxima = 1518 B (1522 B con etiqueta 802.1Q). El término MTU se reserva para el payload máximo (1500 B). Relleno si el payload < 46 B (jumbo frames ~9000 B, fuera de CCNA).
 - **FCS**: CRC-32; el receptor lo recalcula y descarta si no coincide.
 
 Trama IEEE 802.11 (Wi‑Fi): más compleja (duración, secuencia, direcciones 1–4 según AP/bridge). Mención suficiente para el examen: Wi‑Fi también usa tramas con MACs.
@@ -82,7 +82,7 @@ En modo Simulation, envía un ping entre dos PCs conectados a un switch y fuerza
 - Destino broadcast (todos la procesan), origen MAC del emisor, tipo 0x0806 (ARP), relleno si hace falta para llegar a 64 B, FCS válido.
 
 ### Ejemplo 4 — De hub a switch
-Oficina 1998: 10BASE2 en bus coaxial, un corte en el cable tumba toda la planta. Migración a estrella con switches 2960: cada mesa con su latiguillo; un cable cortado solo afecta a ese usuario; el switch aprende MACs y conmuta en línea retrás. Diagnóstico: `show mac address-table`, `show interfaces status`.
+Oficina 1998: 10BASE2 en bus coaxial, un corte en el cable tumba toda la planta. Migración a estrella con switches 2960: cada mesa con su latiguillo; un cable cortado solo afecta a ese usuario; el switch aprende MACs y conmuta en tiempo real (store-and-forward / cut-through). Diagnóstico: `show mac address-table`, `show interfaces status`.
 
 ## Ejercicios
 
